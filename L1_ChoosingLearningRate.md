@@ -1,5 +1,5 @@
 
-# Choosing a learning rate
+# FastAI Lesson 1 - Choosing a learning rate
 ## Initial Setup for fast AI Image Classification starter kit
 
 ```python
