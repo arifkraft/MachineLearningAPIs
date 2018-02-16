@@ -1,4 +1,44 @@
+
 # Choosing a learning rate
+## Initial Setup for fast AI Image Classification starter kit
+
+```python
+# Put these at the top of every notebook, to get automatic reloading and inline plotting
+%reload_ext autoreload
+%autoreload 2
+%matplotlib inline
+
+# This file contains all the main external libs we'll use
+from fastai.imports import *
+
+from fastai.transforms import *
+from fastai.conv_learner import *
+from fastai.model import *
+from fastai.dataset import *
+from fastai.sgdr import *
+from fastai.plots import *
+
+PATH = "data/dogscats/"
+sz=224
+
+torch.cuda.is_available()
+
+torch.backends.cudnn.enabled
+
+os.listdir(PATH)
+os.listdir(f'{PATH}valid')
+files = os.listdir(f'{PATH}valid/cats')[6:10]
+files
+img = plt.imread(f'{PATH}valid/cats/{files[1]}')
+plt.imshow(img)
+
+# Train the model
+arch=resnet34
+data = ImageClassifierData.from_paths(PATH, tfms=tfms_from_model(arch, sz))
+learn = ConvLearner.pretrained(arch, data, precompute=True)
+learn.fit(0.009, 4)
+```
+
 1. We first create a new learner, since we want to know how to set the learning rate for a new (untrained) model.
 
 ```python
@@ -65,4 +105,18 @@ learn.unfreeze()
 lr=np.array([1e-4,1e-3,1e-2])
 learn.fit(lr, 3, cycle_len=1, cycle_mult=2)
 ```
+Note that's what being plotted above is the learning rate of the final layers. The learning rates of the earlier layers are fixed at the same multiples of the final layer rates as we initially requested (i.e. the first layers have 100x smaller, and middle layers 10x smaller learning rates, since we set lr=np.array([1e-4,1e-3,1e-2]).
 
+```python 
+learn.save('224_all')
+learn.load('224_all')
+```
+## Using TTA: Test Time Augmentation
+There is something else we can do with data augmentation: use it at inference time (also known as test time). Not surprisingly, this is known as test time augmentation, or just TTA.TTA simply makes predictions not just on the images in your validation set, but also makes predictions on a number of randomly augmented versions of them too (by default, it uses the original image along with 4 randomly augmented versions). It then takes the average prediction from these images, and uses that. To use TTA on the validation set, we can use the learner's `TTA()` method.
+
+```python
+log_preds,y = learn.TTA()
+probs = np.mean(np.exp(log_preds),0)
+
+accuracy_np(probs, y)
+```
