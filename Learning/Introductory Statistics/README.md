@@ -1,4 +1,4 @@
-# Contents Introductory Statistics
+# Contents - Introductory Statistics
 
 ## Basic Statistics
 
