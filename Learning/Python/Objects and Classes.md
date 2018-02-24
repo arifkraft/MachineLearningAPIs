@@ -36,7 +36,7 @@ class Employee:
     return '{} {}'.format(self.first, self.last)
 # Now we can specify our arguments for each instance in the __init__ method 
 emp_1 = Employee('Arif','Alam', 50000)
-emp_1 = Employee('John','Doe', 60000)
+emp_2 = Employee('John','Doe', 60000)
 
 print(emp_1.email)
 print(emp_2.email)
@@ -65,12 +65,12 @@ raise_amount = 1.04
   def full_name(self):
     return '{} {}'.format(self.first, self.last)
     
-  def raise_amount(self):
+  def apply_raise(self):
     return int(self.pay*self.raise_amount)
     
 # Now we can specify our arguments for each instance in the __init__ method 
 emp_1 = Employee('Arif','Alam', 50000)
-emp_1 = Employee('John','Doe', 60000)
+emp_2 = Employee('John','Doe', 60000)
 
 emp1.raise_amount()
 ```
@@ -110,15 +110,15 @@ class Employee:
      
   def full_name(self):
     return '{} {}'.format(self.first, self.last)
-  def raise_amount(self):
+  def aplly_raise(self):
     return int(self.pay*self.raise_amount)
     
 # Now we can specify our arguments for each instance in the __init__ method
 emp_1 = Employee('Arif','Alam', 50000)
-emp_1 = Employee('John','Doe', 60000)
+emp_2 = Employee('John','Doe', 60000)
 
 print(Employee.num_emps)
 # This outputs 2 
 
 ```
-One obvious questions noe is that if we have `class variables`, do we  also have `class methods`. The answer is yes and we will look that in the  
+One obvious questions noe is that if we have `class variables`, do we  also have `class methods`. The answer is yes and we will take a look that in the next section :)
