@@ -17,7 +17,8 @@ the architecture with the data.
 The thing that most determines how we are going to zoom in or home in on the solution. Were is the "minimum point". How do you find the minimum point?If i was a computer algorithm, how do i found the minimum. The `learning rate` is how big of a jump that we will advance (the size of the arrow in the image below)
 ![Optimization](http://downhill.readthedocs.org/en/latest/_images/rosenbrock-nag.png)
 <br>
-What happens if your learning rate is too high? It diverges and cannot find the optimum loss.
+What happens if your `learning rate` is too high? It diverges and cannot find the optimum. What happens if the `learning rate` is too
+low. It takes up too much memory may also settle for `unwanted` local minima. Will talk about that in `SGD with restarts`
 
 
 
