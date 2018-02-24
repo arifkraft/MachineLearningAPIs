@@ -8,7 +8,7 @@ data = ImageClassifierData.from_paths(PATH, tfms=tfms_from_model(arch, sz))
 learn = ConvLearner.pretrained(arch, data, precompute=True)
 learn.fit(0.01, 3)
 ```
-`sz` is the size of minibatch. Should lower this one for weaker machines. `arch` is the pretrained NN architecture and is selected as
+`sz` is the spatial size of the image i.e `224x224`. `arch` is the pretrained NN architecture and is selected as
 [resnet34](https://arxiv.org/abs/1512.03385). `ImageClassifierData.from_paths` takes data from `path`. `ConvLearner.pretrained` makes 
 necessary settings for training the architecture. `learn.fit` takes two arguments, `learning rate` and `number of epochs` and trains 
 the architecture with the data.
