@@ -38,7 +38,7 @@ def get_augs():   
 
 ## 3. Precompute 
 Note, we are using a pretrained network. We can take the 2nd last layer and save those `activations`. There is this level of "dog space" "eyeballs" etc. We save these and call these `pre-computed activations`.
-> Comment: The augmentation won't doing anything because of precompute<br>
+Comment: The augmentation won't doing anything because of precompute<br>
 How to make a new classifier from `pre-compute`?<br>
 We can quickly train a simple linear model based on these saved precomputed numbers. So the first time you run a model, it will take some time to calculate and compile. Then afterwards, it will train much faster.
 ```python
@@ -62,3 +62,47 @@ Sometimes one minima will be better than others (based on how well it `generaliz
 > Note that annealing is not the same as restarts<br>
 
 ### 5. Stochastic Gradient Descent with Restarts
+
+What is that `cycle_len` parameter? What we've done here is used a technique called *stochastic gradient descent with restarts (SGDR)*, a variant of *learning rate annealing*, which gradually decreases the learning rate as training progresses. This is helpful because as we get closer to the optimal weights, we want to take smaller steps.<br>
+However, we may find ourselves in a part of the weight space that isn't very resilient - that is, **small changes to the weights may result in big changes to the loss.** We want to encourage our model to find parts of the weight space that are both accurate and stable. Therefore, from time to time we increase the learning rate (this is the 'restarts' in 'SGDR'), which will force the model to **jump to a different part of the weight space if the current area is "spikey".** Here's a picture of how that might look if we reset the learning rates 3 times (in this paper they call it a "cyclic LR schedule"):
+
+<img src="https://cdn-images-1.medium.com/max/1002/1*9Fca3kpx3pVW8SaYz2pjpw.png" width=600>
+
+The number of epochs between resetting the learning rate is set by `cycle_len`, and the number of times this happens is refered to as the *number of cycles*, and is what we're actually passing as the 2nd parameter to `fit()`. So here's what our actual learning rates looked like:
+
+<img src= "http://forums.fast.ai/uploads/default/original/2X/2/2b56caa0a5f87fb17429eb961fa2adf77f299547.png" width=400>
+Good tip, Save as you go!
+
+```python
+learn.save('224_lastlayer')
+```
+
+### 6. Differential Learning Rate Annealing
+Now that we have a good final layer trained, we can try fine-tuning the other layers. To tell the learner that we want to unfreeze the remaining layers, just call (surprise surprise!) `unfreeze()`.
+```python
+learn.unfreeze()
+```
+Note that the other layers have *already* been trained to recognize imagenet photos (whereas our final layers where randomly initialized), so we want to be careful of not destroying the carefully tuned weights that are already there.
+Generally speaking, the earlier layers (as we've seen) have more general-purpose features. Therefore we would expect them to need less fine-tuning for new datasets. For this reason we will use different learning rates for different layers: the first few layers will be at 1e-4, the middle layers at 1e-3, and our FC layers we'll leave at 1e-2 as before. We refer to this as *differential learning rates*, although there's no standard name for this techique in the literature that we're aware of.
+#### Specifying learning rates
+We are going to specify 'differential learning rates' for different layers. We are grouping the blocks (RESNET blocks) in different areas and assigning different learning rates.
+Reminder: we unfroze the layers and now we are retraining the whole set. The learning rate is smaller for early layers and making them larger for the ones farther away
+```python
+lr=np.array([1e-4,1e-3,1e-2])
+# 3 is the number of cycles
+# 3 cycles of 2 epochs
+learn.fit(lr, 3, cycle_len=1, cycle_mult=2)
+```
+`cycle_mult` doubles the cycle length after each `cycle`
+Take a look at the following chart, and see if you can figure out what the parameter is doing:
+
+```python
+learn.sched.plot_lr()
+```
+### 7. Test Time Augmentation
+We are going to do. Use **test time augmentation** we are going to take 4 random data augmentation. Move them around and flip and mix with the prediction. We are going to average all the predictions of the original + permutation. Ideally the rotating + zoom will get it in the right orientation <br>
+TTA() - makes predictions not only on the originals but also on the random augmented generated
+```python
+log_preds,y = learn.TTA()
+accuracy(log_preds,y)
+```
