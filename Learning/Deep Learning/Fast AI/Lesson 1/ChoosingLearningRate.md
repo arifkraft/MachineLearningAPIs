@@ -118,5 +118,5 @@ There is something else we can do with data augmentation: use it at inference 
 log_preds,y = learn.TTA()
 probs = np.mean(np.exp(log_preds),0)
 
-accuracy_np(probs, y)
+accuracy_np(probs, y), metrics.log_loss(y, probs)
 ```
