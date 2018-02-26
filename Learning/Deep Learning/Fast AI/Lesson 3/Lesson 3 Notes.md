@@ -54,6 +54,14 @@ preds = learn.predict_array(im[None])
 ```
 There's a cool trick in `numpy`. `im[None]` converts the image into a tensor ie. `[224x224x3] -> [1x224x224x3]` as it is just one image.
 
+## Theory: Convlutional Neural Networks
+Now we will get into little bit of what's going on with all this stuff!<br>
+Well here's a very intuitive visual explanation of whats going on with `ConvNet`. [Check this out!](https://www.youtube.com/watch?v=Oqm9vsf_hvU). <br>
+**What is an activation?**<br>
+An `activation` is just a number. A number that is obtained by finding the sum of matrix multiplication of the portion of the `input_image` (usually 3x3) and `filter stride` (3x3).<br>
+`Pytorch` does not store `filters` as separate filters/kernels but as `tensors`. Filters and  Kernels mean pretty much the same thing.
+<br>
+Also remember that if there are two `filters` it means the `hidden_layer` has a size 2.
 
 
 
