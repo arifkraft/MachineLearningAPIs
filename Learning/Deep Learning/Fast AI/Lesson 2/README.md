@@ -4,3 +4,5 @@
 1. DogBreed Competition Notebook
 1. Planet Amazon Challenge 
 1. Import resnext and other architectures
+1. Hyper-parameter Experiments
+1. Code Anatomy
