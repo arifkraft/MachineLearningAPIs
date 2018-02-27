@@ -11,7 +11,7 @@ def find_sqaures(nums):
 nums= [1,2,3,4,5]
 print(find_squares(nums))
 ```
-Alternatively, what we can do is to ceate `generator` objects. Have a look at the code below - 
+Alternatively, what we can do is to create `generator` objects. Have a look at the code below - 
 ```python
 def find_squares(nums):
   for i in nums:
@@ -26,13 +26,13 @@ next(squares)
 for el in squares:
   print el 
 ```
-We can also use h `list comprehensions` just that we use parantheses instead of square brackets
+We can also use the `list comprehensions` just that we use parantheses instead of square brackets
 
 ```python  
 squares = [x*x for x in [1,2,3,4,5]] # gives you a list
 squares = (x*x for x in [1,2,3,4,5]) # gives you a generator
 ```
-One of the main advatages of using a generator over a list is its memory usage. To get a sense of that, lets take a look at an
+One of the main advatages of using a generator over a list is its `memory allocation`. To get a sense of that, lets take a look at an
 example below -
 ```python 
 import time 
@@ -76,4 +76,4 @@ t2 = time.clock()
 print('Memory After: {}Mb'.format(mem_profile.memory_usage_resource()))
 print('Time Taken is {}'.format(t2-t1))
 ```
-You will clearly see the difference is terms of memory allocated and time consumed
+You will clearly see the difference is terms of `memory allocated` and `time consumed`
