@@ -58,23 +58,44 @@ There's a cool trick in `numpy`. `im[None]` converts the image into a tensor ie.
 Now we will get into little bit of what's going on with all this stuff!<br>
 Well here's a very intuitive visual explanation of whats going on with `ConvNet`. [Check this out!](https://www.youtube.com/watch?v=Oqm9vsf_hvU). 
 
-##### What is an activation?
+#### What is an activation?
 An `activation` is just a number. A number that is obtained by finding the sum of matrix multiplication of the portion of the `input_image` (usually 3x3) and `filter stride` (3x3).
 <br>
 `Pytorch` does not store `filters` as separate filters/kernels but as `tensors`. Filters and  Kernels mean pretty much the same thing.
 Also remember that if there are two `filters` it means the `hidden_layer` has a size 2.
 
-##### What to do when you got less number of `channels` for a pre-trained network?
+#### What to do when you got less number of `channels` for a pre-trained network?
 Some strategies you might wanna try -
 1. 1 channel  - Make copies of the single channel into three
 1. 2 channels - Create a third channel as the average of the the existing two or create a copy of one of the two
 
-##### What about more than 3 channels?
+#### What about more than 3 channels?
 Jeremy shares his experience where he used satellite images which had 4-channels (4th is the infra-red band). What he did then was to add an extra level/filter to the `convolutional kernel` that were all zeros.
 
-##### What are activation functions?
+#### What are activation functions?
 `Activation Functions` are the functions that we apply to the activations `ReLU` is `MAX(0, act)` is an activation function. `sigmoid` 
-is used to convert activations into `probabilities` is an activation function.
+is used to convert activations into `probabilities` is an activation function. Takes in one number and spits out another number.
+<br>
+**Well, Get the hang of `log` and `exp`. Do some experiments/plots to understand better**
+
+> These activation function add non-linearity to the architecture. Because if you stack up a bunch of linear layers together you get
+a linear layer in the end
+
+#### How does `soft_max` work?
+
+Softmax or the sigmoid is an activation function that lets us get more intuitive outputs from our architecture. ie. if you have 5 classes, you need an output that is between (0,1) for each class and whose some adds up to 1 just as probabilities. So technically this is how it is done:
+
+|Lablel  |Output  |Exp      |Softmax  |
+|--------|--------|---------|---------|
+|cat     |-1.63   |0.20     |0.15     |
+|dog     |-0.05   |0.95     |0.74     |
+|plane   |-4.75   |0.01     |0.01     |
+|fish    |-3.54   |0.03     |0.02     |
+|building|-2.38   |0.09     |0.07     |
+|        |        |**1.28** |**1.00** |
+
+
+
 
 
 
