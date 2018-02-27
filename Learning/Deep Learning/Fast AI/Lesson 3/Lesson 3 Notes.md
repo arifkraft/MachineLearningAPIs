@@ -58,21 +58,21 @@ There's a cool trick in `numpy`. `im[None]` converts the image into a tensor ie.
 Now we will get into little bit of what's going on with all this stuff!<br>
 Well here's a very intuitive visual explanation of whats going on with `ConvNet`. [Check this out!](https://www.youtube.com/watch?v=Oqm9vsf_hvU). 
 
-#### What is an activation?
+### 1. What is an activation?
 An `activation` is just a number. A number that is obtained by finding the sum of matrix multiplication of the portion of the `input_image` (usually 3x3) and `filter stride` (3x3).
 <br>
 `Pytorch` does not store `filters` as separate filters/kernels but as `tensors`. Filters and  Kernels mean pretty much the same thing.
 Also remember that if there are two `filters` it means the `hidden_layer` has a size 2.
 
-#### What to do when you got less number of `channels` for a pre-trained network?
+### 2. What to do when you got less number of `channels` for a pre-trained network?
 Some strategies you might wanna try -
 1. 1 channel  - Make copies of the single channel into three
 1. 2 channels - Create a third channel as the average of the the existing two or create a copy of one of the two
 
-#### What about more than 3 channels?
+### 3. What about more than 3 channels?
 Jeremy shares his experience where he used satellite images which had 4-channels (4th is the infra-red band). What he did then was to add an extra level/filter to the `convolutional kernel` that were all zeros.
 
-#### What are activation functions?
+### 4. What are activation functions?
 `Activation Functions` are the functions that we apply to the activations `ReLU` is `MAX(0, act)` is an activation function. `sigmoid` 
 is used to convert activations into `probabilities` is an activation function. Takes in one number and spits out another number.
 <br>
@@ -81,7 +81,7 @@ is used to convert activations into `probabilities` is an activation function. T
 > These activation function add non-linearity to the architecture. Because if you stack up a bunch of linear layers together you get
 a linear layer in the end
 
-#### How does `soft_max` work?
+### 5. How does `soft_max` work?
 
 Softmax is an activation function that lets us get more intuitive outputs from our architecture. ie. if you have 5 classes, you need an output that is between (0,1) for each class and whose some adds up to 1 just as probabilities. So technically this is how it is done:
 
@@ -96,7 +96,7 @@ Softmax is an activation function that lets us get more intuitive outputs from o
 
 Softmax is only done for a `single-label` classification problem. That's an important thing to keep in mind! 
 
-#### Multi-label classification
+### 6. Multi-label classification
 This is where a sample can fall into mulitple classes. The `planet` competition is one such example. Look into the `lesson2` planet notebook.
 In `multi-label`, the  last layer instead of `softmax` is actually a `sigmoid`. This is an important distinction. 
 
@@ -133,5 +133,21 @@ data = data.resize(int(sz*1.3), 'tmp')
 If you have really big images coming in it will save you a lot of time. Its like taking in `1000x1000` and then converting to `64x64` is indeed a massive task!
 <br>
 Also, the `evaluation metric` used for Planet competition is `fbeta`. So, have a look at that too!
+### 7. Freezing Layers
+You will find that many researchers tend to `freeze` subsets of layers for training. However, Jeremy found that the idea of `differential learning rates` seem to work much better. One important thing to note here is that `CatsvsDogs` will have much smaller learning rates `lr/1000` for the initial set of layers compared to `lr/10` for `Planet` competition where we want the weights to change more! 
 
+### 8. Layer Groups
+There are ways to recreate your own layer groups. But for now if you look at the code:
+```python
+learn.fit([1e-5,1e-3,1e-2], 3, cycle_len= 1, cycle_mul=2)
+```
+Clearly, there are three groups:
+1. 1e-2 (For all `FC` layers taken together)
+1. 1e-3 (Halfway from prev)
+1. 1e-5 (Initial half)
 
+### 8. How do I see the layers of the arch?
+```python
+learn.summary()
+```
+At the end of this Lesson you should start to get yourself into as many Kaggle competitions as possible. So thats your HomeWork for the Week
