@@ -5,8 +5,8 @@ example here. Here is a function that takes in `list` as input and gives out the
 def find_sqaures(nums):
 	squares = []
 	for i in nums:
-    	squares.append(i*i)
-  	return squares
+		squares.append(i*i)
+	return squares
 
 nums= [1,2,3,4,5]
 print(find_squares(nums))
@@ -14,8 +14,8 @@ print(find_squares(nums))
 Alternatively, what we can do is to create `generator` objects. Have a look at the code below - 
 ```python
 def find_squares(nums):
-  	for i in nums:
-    	yield i*i
+	for i in nums:
+		yield i*i
     
 nums= [1,2,3,4,5]
 print(find_squares(nums)) # prints <generator_object>
@@ -45,24 +45,24 @@ profession = ['engineer', 'doctor', 'teacher', 'scientist', 'developer']
 # Fucntion that creates a dictionary (as a list)
 
 def person_by_list(range_):
-  	result =[]
-  	for i in range(range_):
-    	person  = {'id': i,
-    	'name': random.choice(names),
-    	'profession': random.choice(profession)
-    	}
-    	result.append(person)
-  	return result
+	result =[]
+	for i in range(range_):
+		person  = {'id': i,
+		'name': random.choice(names),
+		'profession': random.choice(profession)
+		}
+		result.append(person)
+	return result
 
 # Function that creates a dictionary (as a generator)
 
 def person_by_generator(range_):
-  	for i in range(range_):
-    	person  = {'id': i,
-    	'name': random.choice(names),    
-    	'profession': random.choice(profession)
-    	}
-    	yield person
+	for i in range(range_):
+		person  = {'id': i,
+		'name': random.choice(names),    
+		'profession': random.choice(profession)
+		}
+		yield person
 
 
 print('Memory After: {}Mb'.format(mem_profile.memory_usage_resource()))
