@@ -121,4 +121,4 @@ print(Employee.num_emps)
 # This outputs 2 
 
 ```
-One obvious questions noe is that if we have `class variables`, do we  also have `class methods`. The answer is yes and we will take a look that in the next section :)
+One obvious question now is that if we have `class variables`, do we  also have `class methods`. The answer is yes and we will take a look that in the next section :)
