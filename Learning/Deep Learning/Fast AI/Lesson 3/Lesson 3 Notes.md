@@ -83,22 +83,56 @@ a linear layer in the end
 
 #### How does `soft_max` work?
 
-Softmax or the sigmoid is an activation function that lets us get more intuitive outputs from our architecture. ie. if you have 5 classes, you need an output that is between (0,1) for each class and whose some adds up to 1 just as probabilities. So technically this is how it is done:
+Softmax is an activation function that lets us get more intuitive outputs from our architecture. ie. if you have 5 classes, you need an output that is between (0,1) for each class and whose some adds up to 1 just as probabilities. So technically this is how it is done:
 
-|Lablel  |Output  |Exp      |Softmax  |
+|Label   |Output  |Exp      |Softmax  |
 |--------|--------|---------|---------|
-|cat     |-1.63   |0.20     |0.15     |
+|cat     |-1.63   |0.20     |0.15     |
 |dog     |-0.05   |0.95     |0.74     |
-|plane   |-4.75   |0.01     |0.01     |
-|fish    |-3.54   |0.03     |0.02     |
+|plane   |-4.75   |0.01     |0.01     |
+|fish    |-3.54   |0.03     |0.02     |
 |building|-2.38   |0.09     |0.07     |
-|        |        |**1.28** |**1.00** |
+|        |        |**1.28** |**1.00** |
 
+Softmax is only done for a `single-label` classification problem. That's an important thing to keep in mind! 
 
+#### Multi-label classification
+This is where a sample can fall into mulitple classes. The `planet` competition is one such example. Look into the `lesson2` planet notebook.
+In `multi-label`, the  last layer instead of `softmax` is actually a `sigmoid`. This is an important distinction. 
 
+$$ Softmax: \frac{e^x_i}{sum(e^x)}$$
 
+$$ Sigmoid: \frac{e^x_i}{1-e^x_i}$$
 
+<br>
+In Pytorch the `data` object that you create has two things, `ds` is the dataset and `dl` is the data loader which gives you the minibatch
 
+```python
+data = get_data(256)
+x,y = next(iter(data.val_dl))
+print(y)
+```
+So, if you remember from `Otavia's Video`, at the end of the process, the letters are compared with `actuals`. However, `Pytorch` does the comparison through indexing. Have a look below -
 
+|Label   |Output  |Exp      |Softmax  |Actuals |Index   |
+|--------|--------|---------|---------|--------|--------|
+|cat     |-1.63   |0.20     |0.15     |0       |1       |
+|dog     |-0.05   |0.95     |0.74     |1       |2       |
+|plane   |-4.75   |0.01     |0.01     |0       |3       |
+|fish    |-3.54   |0.03     |0.02     |0       |4       |
+|building|-2.38   |0.09     |0.07     |0       |5       |
+|        |        |**1.28** |**1.00** |        |        |
+
+Behind the scenes, Pytorch does convert to `one-hot-encoding` and calculate `loss` and stuff!<br>
+For the `Planet` Competition, You need to start with small image size `sz=64` because this is nothing like `ImageNet`. We dont do small image sizes for `Cats and Dogs` we don't want to screw up the `weights` as Cats and Dogs is more like `ImageNet`.
+<br>
+In the planet competition, you will notice the piece of code `data.resize` and you might be wondering what that does!
+
+```python
+data = data.resize(int(sz*1.3), 'tmp')
+```
+If you have really big images coming in it will save you a lot of time. Its like taking in `1000x1000` and then converting to `64x64` is indeed a massive task!
+<br>
+Also, the `evaluation metric` used for Planet competition is `fbeta`. So, have a look at that too!
 
 
