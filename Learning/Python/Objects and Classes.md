@@ -12,7 +12,7 @@ It would be nice if we create a blueprint for each employee so that we don't hav
 So lets proceed with a class and see how that would look like - 
 ```python
 class Employee:
-  pass 
+	pass 
 ```
 So what is the difference between `class` and a `class instance`. A class is basically a blueprint for creating instances. And each employee 
 will be an `instance` of that `class`
@@ -26,14 +26,14 @@ Both the `objects` are unique are stored saperately in the memory. `Instance Var
 <br> We are going to use a special `__init__` method. This can be thought of as `constructers`. 
 ```python
 class Employee:
-  def __init__(self, first, last, pay):
-    self.first = first
-    self.last = last 
-    self.pay = pay
-    self.email =first + '.' + last + '@company.com'
-    
-  def full_name(self):
-    return '{} {}'.format(self.first, self.last)
+	def __init__(self, first, last, pay):
+		self.first = first
+		self.last = last 
+		self.pay = pay
+		self.email =first + '.' + last + '@company.com'
+		
+	def full_name(self):
+		return '{} {}'.format(self.first, self.last)
 # Now we can specify our arguments for each instance in the __init__ method 
 emp_1 = Employee('Arif','Alam', 50000)
 emp_2 = Employee('John','Doe', 60000)
@@ -56,17 +56,17 @@ define a class variable as shown below.
 ```python
 class Employee:
 raise_amount = 1.04
-  def __init__(self, first, last, pay):
-    self.first = first
-    self.last = last
-    self.pay = pay
-    self.email =first + '.' + last + '@company.com'
-  
-  def full_name(self):
-    return '{} {}'.format(self.first, self.last)
+	def __init__(self, first, last, pay):
+		self.first = first
+		self.last = last
+		self.pay = pay
+		self.email =first + '.' + last + '@company.com'
+		
+	def full_name(self):
+		return '{} {}'.format(self.first, self.last)
     
-  def apply_raise(self):
-    return int(self.pay*self.raise_amount)
+	def apply_raise(self):
+		return int(self.pay*self.raise_amount)
     
 # Now we can specify our arguments for each instance in the __init__ method 
 emp_1 = Employee('Arif','Alam', 50000)
@@ -99,19 +99,19 @@ how many employees we have in our employee class
 
 ```python
 class Employee:
-  num_of_emps=0
-  raise_amount = 1.04
-  def __init__(self, first, last, pay):
-    self.first = first
-     self.last = last
-     self.pay = pay
-     self.email =first + '.' + last + '@company.com'
-     Employee.num_of_emps += 1 
-     
-  def full_name(self):
-    return '{} {}'.format(self.first, self.last)
-  def aplly_raise(self):
-    return int(self.pay*self.raise_amount)
+	num_of_emps=0
+	raise_amount = 1.04
+	def __init__(self, first, last, pay):
+		self.first = first
+		self.last = last
+		self.pay = pay
+		self.email =first + '.' + last + '@company.com'
+		Employee.num_of_emps += 1 
+	def full_name(self):
+		return '{} {}'.format(self.first, self.last)
+		
+	def apply_raise(self):
+		return int(self.pay*self.raise_amount)
     
 # Now we can specify our arguments for each instance in the __init__ method
 emp_1 = Employee('Arif','Alam', 50000)
