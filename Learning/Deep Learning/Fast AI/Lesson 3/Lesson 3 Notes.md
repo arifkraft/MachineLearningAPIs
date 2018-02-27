@@ -100,11 +100,10 @@ Softmax is only done for a `single-label` classification problem. That's an impo
 This is where a sample can fall into mulitple classes. The `planet` competition is one such example. Look into the `lesson2` planet notebook.
 In `multi-label`, the  last layer instead of `softmax` is actually a `sigmoid`. This is an important distinction. 
 
-$$ Softmax: \frac{e^x_i}{sum(e^x)}$$
-
-$$ Sigmoid: \frac{e^x_i}{1-e^x_i}$$
-
+<a href="https://www.codecogs.com/eqnedit.php?latex=$$&space;Softmax:&space;\frac{e^{x_i}}{sum(e^x)}$$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?$$&space;Softmax:&space;\frac{e^{x_i}}{sum(e^x)}$$" title="$$ Softmax: \frac{e^{x_i}}{sum(e^x)}$$" /></a> <br>
+<a href="https://www.codecogs.com/eqnedit.php?latex=$$&space;Sigmoid:&space;\frac{e^{x_i}}{1-e^{x_i}}$$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?$$&space;Sigmoid:&space;\frac{e^{x_i}}{1-e^{x_i}}$$" title="$$ Sigmoid: \frac{e^{x_i}}{1-e^{x_i}}$$" /></a> 
 <br>
+
 In Pytorch the `data` object that you create has two things, `ds` is the dataset and `dl` is the data loader which gives you the minibatch
 
 ```python
