@@ -70,7 +70,6 @@ Some strategies you might wanna try -
 1. 1 channel  - Make copies of the single channel into three
 1. 2 channels - Create a third channel as the average of the the existing two or create a copy of one of the two
 
-<br>
 **What about more than 3 channels?**<br>
 Jeremy shares his experience where he used satellite images which had 4-channels (4th is the infra-red band). What he did then was to add an extra level/filter to the `convolutional kernel` that were all zeros.
 <br><br>
