@@ -55,9 +55,9 @@ learn.sched.plot_lr()
 tfms = tfms_from_model(resnet34, sz, aug_tfms=transforms_side_on, max_zoom=1.1)
 
 def get_augs():
-  data = ImageClassifierData.from_paths(PATH, bs=2, tfms=tfms, num_workers=1)   
-  x,_ = next(iter(data.aug_dl))
-  return data.trn_ds.denorm(x)[1]
+	data = ImageClassifierData.from_paths(PATH, bs=2, tfms=tfms, num_workers=1)   
+	x,_ = next(iter(data.aug_dl))
+	return data.trn_ds.denorm(x)[1]
 
 ims = np.stack([get_augs() for i in range(6)])
 
