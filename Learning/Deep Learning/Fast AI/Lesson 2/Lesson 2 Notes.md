@@ -29,9 +29,9 @@ Transformantion Library
 tfms = tfms_from_model(resnet34, sz, aug_tfms=transforms_side_on, max_zoom=1.1)
 
 def get_augs():    
-  data = ImageClassifierData.from_paths(PATH, bs=2, tfms=tfms, num_workers=1)    
-  x,_ = next(iter(data.aug_dl))   
-  return data.trn_ds.denorm(x)[1]
+	data = ImageClassifierData.from_paths(PATH, bs=2, tfms=tfms, num_workers=1)    
+	x,_ = next(iter(data.aug_dl))   
+	return data.trn_ds.denorm(x)[1]
 ```
 <img src="https://qph.ec.quoracdn.net/main-qimg-e5037e9f5393c6e18a3bb30b4d2098f9-c" width="450">
 
