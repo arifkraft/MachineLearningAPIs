@@ -57,24 +57,22 @@ There's a cool trick in `numpy`. `im[None]` converts the image into a tensor ie.
 ## Theory: Convlutional Neural Networks
 Now we will get into little bit of what's going on with all this stuff!<br>
 Well here's a very intuitive visual explanation of whats going on with `ConvNet`. [Check this out!](https://www.youtube.com/watch?v=Oqm9vsf_hvU). 
-<br><br>
-**What is an activation?**
-<br>
+
+##### What is an activation?
 An `activation` is just a number. A number that is obtained by finding the sum of matrix multiplication of the portion of the `input_image` (usually 3x3) and `filter stride` (3x3).
 <br>
 `Pytorch` does not store `filters` as separate filters/kernels but as `tensors`. Filters and  Kernels mean pretty much the same thing.
 Also remember that if there are two `filters` it means the `hidden_layer` has a size 2.
-<br><br>
-**What to do when you got less number of `channels` for a pre-trained network?**<br>
+
+##### What to do when you got less number of `channels` for a pre-trained network?
 Some strategies you might wanna try -
 1. 1 channel  - Make copies of the single channel into three
 1. 2 channels - Create a third channel as the average of the the existing two or create a copy of one of the two
 
-**What about more than 3 channels?**<br>
+##### What about more than 3 channels?
 Jeremy shares his experience where he used satellite images which had 4-channels (4th is the infra-red band). What he did then was to add an extra level/filter to the `convolutional kernel` that were all zeros.
-<br><br>
-**What are activation functions?**
-<br>
+
+##### What are activation functions?
 `Activation Functions` are the functions that we apply to the activations `ReLU` is `MAX(0, act)` is an activation function. `sigmoid` 
 is used to convert activations into `probabilities` is an activation function.
 
