@@ -24,3 +24,11 @@ unzip test.zip
 
 Now you're ready to set up your directory structure with sample, classes, and valid directories and sub-directories as 
 needed to get the data working with the lesson 1 notebook.
+<br>
+To unzip 7zip files you need to do the following
+```python
+sudo apt-get install p7zip-full
+
+7za x myfile.tar.7z
+tar -xvf myfile.tar
+```
