@@ -8,5 +8,5 @@ learn.set_data(get_data(sz))
 learn.freeze()
 learn.fit(lr, 3, cycle_len=1, cycle_mult=2)
 ```
-**Description:** Not sure what cuased it!<br>
-**Solution:** `NOT RESOLVED`
+**Description:** : Out of CPU RAM
+**Solution:** Upgrade to 8 vCPU 64 GB RAM. Also FastAI doesn't support multi-GPU. Get P100 instead of K80
