@@ -17,11 +17,21 @@ def squares(num):
 	return num*num
 
 # a custom map function
-def map(arg_func, arg_list):	
-	for i in arg_list:
-		yield i*i 
+def map(arg_func, arg_list):
+	for i_ in arg_list:
+		yield arg_func(i_)
 
-next(map(squares, [2,3,4,5])
+gen = map(squares,[2,3,4,5])
 
+for el in gen:
+	print(el)
+
+def cubes(num):
+	return num*num*num
+
+gen = map(cubes, [2,3,4,5])
+
+for el in gen:
+	print(el)
 
 ```
