@@ -90,7 +90,7 @@ def summer(*args):
 
 summer(1,2,3,4)
 ```
-How do we `chain` decorators` one on top of the other. To be able to do that we will have to import `wraps` from `functools` and add `wraps(orig_func)` before all the `wrap` functions inside decorators
+How do we `chain` decorators one on top of the other. To be able to do that we will have to import `wraps` from `functools` and add `wraps(orig_func)` on top of all the `wrap` functions inside decorators
 ```python
 from functools import wraps 
 
