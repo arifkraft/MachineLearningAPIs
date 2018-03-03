@@ -38,5 +38,19 @@ def decorator(orig_func):
 		pass
 	return wrapper 
 ```
-
-
+We could also create `class decorators` that has the exact same functionality:
+```python
+class decorator(object):
+	def __init__(self,orig_func):
+		self.orig_func = orig_func
+	def __call__(self, *args, **kwargs):
+		print('Executing : {} with args {} and krwargs {}'.format(self.orig_func.__name__,args,kwargs))
+		return self.orig_func(*args, **kwargs)
+	
+@decorator
+def summer(*args):
+	return sum(args)
+	
+summer(1,2,3,4)
+```
+Lets have a look at a practical examples:
