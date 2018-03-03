@@ -1,5 +1,5 @@
 # Decorators and Wrappers
-`Decorators` are functions that takes `function` as the argument. `Adds` more functionality to it and then returns a `function`. One thing 
+`Decorators` are functions that take `function` as the argument. `Adds` more functionality to it and then returns a `function`. One thing 
 to note however is that the source code of the `original_function` that is being passed on as an argument is not altered in any way.
 Let's have a look at a very simple example:
 ```python
