@@ -4,9 +4,9 @@ software than like here is what is happening behind the scenes
 
 ## Dropout (Only towards the end of the Neural Network)
 1. It means randomly throwing away activations from convolutional layers
-1. `p=0.5` is the probability of throwing out a randomly selected activation from the `conv` layer. this would mean that you are 
+1. `p=0.5` is the probability of throwing out a randomly selected activation from the `conv` layer. This would mean that you are 
 throwing away `50%` of the activations from the conv layer
-1. This is a good way to solve the generalization problem and certainlya citical step in creating good deep learning models.
+1. This is a good way to solve the generalization problem and certainly a citical step in creating good deep learning models.
 
 #### Q1. Is there anything we need to do in order to compensate for the loss incurred as a result of throwing so many activations away?
 
