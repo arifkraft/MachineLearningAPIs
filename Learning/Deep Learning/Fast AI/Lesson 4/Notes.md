@@ -2,7 +2,7 @@
 This chapter we look at these topics from a very high level. Just touching through the topics. More like here is how to use the 
 software than like here is what is happening behind the scenes
 
-## Dropout (Only towards the end of the Neural Network)
+## Dropout 
 1. It means randomly throwing away activations from convolutional layers
 1. `p=0.5` is the probability of throwing out a randomly selected activation from the `conv` layer. This would mean that you are 
 throwing away `50%` of the activations from the conv layer
