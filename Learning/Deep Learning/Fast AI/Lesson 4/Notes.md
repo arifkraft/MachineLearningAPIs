@@ -38,15 +38,30 @@ increase the dropout rate because they have too many parameters and are more lik
 (7)-LogSoftMax
 ```
 
-## Kaggel's Rossman Challenge
+## Kaggle's Rossman Challenge
 Please check out `.ipynb` version of the Rossman Challenge inside this direcrtory!
 
 Some pointers to note -
 
 1. Catergorical variables are converted to contiguous. The reason is that finally these variables will be converted to matrix
 and you dont want them to be `2014` long when it can be jusy `2` long
-1. One key new concept we need to learn about is called `embeddings`.
+1. One key new concept we need to learn about is called `embeddings`. This is good way to deal with categorical vars in deep
+neural nets. It creates sort of matrix for the the variable. Have a look below:
+
+| Cardinals        | Rand1           | Rand2  | Rand3     |   Rand4    |
+| ------------- |:-------------:| -----:| -------- | --------- |
+| Sunday            | 87687    |78687      |88967     |897987    |
+| Monday | 87687 |78687|88967 |897987 |
+| ..... | 87687 |78687|88967 |897987 |
+| Friday | 87687 |78687|88967 |897987 |
+
+So this looks like a `[4x7]` wieght tensor. There are 4 random weights for each level. The weights will be adjusted accordingly as the training progresses. This is called embeddings.
+
 1. We need to get rid of the last layer of softmax too
+1. Why do embeddings whe you can get away with just one-hot encoding? The reason we are doing embedding is that it just prevents the levels of the variable to act very linearly. Adding embeddings adds more dimensions in which the levels can covary. So Sunday and Saturday need not be fully exclusive now as they can have one of the embeddings as very high or something. 
+1. So how are date categorical vars are taken care of?  Well, there happens to be pandas function `date_addpart` which converts the date into new features like `day of week`, `is_end_month` etc. Now that helps our NN model to also learn some cyclic aspects of the time series
+
+
 
 
 
