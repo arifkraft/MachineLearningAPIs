@@ -38,3 +38,15 @@ increase the dropout rate because they have too many parameters and are more lik
 (7)-LogSoftMax
 ```
 
+## Kaggel's Rossman Challenge
+Please check out `.ipynb` version of the Rossman Challenge inside this direcrtory!
+
+Some pointers to note -
+
+1. Catergorical variables are converted to contiguous. The reason is that finally these variables will be converted to matrix
+and you dont want them to be `2014` long when it can be jusy `2` long
+1. One key new concept we need to learn about is called `embeddings`.
+1. We need to get rid of the last layer of softmax too
+
+
+
