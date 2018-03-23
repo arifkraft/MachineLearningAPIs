@@ -64,3 +64,37 @@ RMSE can be interpreted as the standard deviation of the unexplained variance, a
 ## 26. How is gradient boosting different from Adaboost?
 ## 27. Can ensemble models overfit? Why or why not?
 ## 28. Explain cross-validation.
+## 29. Difference between Random Forest and Gradient Boosting -
+Random Forest
+
+| Conceptual                                                                        | Practical                                        | 
+|-----------------------------------------------------------------------------------|--------------------------------------------------|
+| Combine multiple trees. Each fit to a random sample of data                       | Strengths: Easy to use and few parameters        | 
+| Randomly selects rows and columns. Reduces variance with minimal increase in bias | Weakness: Slow to score and Lack of transparency |
+
+Gradient Boosting -
+
+| Conceptual                                                                        | Practical                                        | 
+|-----------------------------------------------------------------------------------|--------------------------------------------------|
+| Fits consecutive trees where each solves for the net loss of the prior trees      | Strengths: Robust, Directly optimizes cost fn    | 
+| Results of new trees are applied partially to the entire dataset                  | Weakness: Overfits and has several hyperparams   |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
