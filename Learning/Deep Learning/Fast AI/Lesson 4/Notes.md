@@ -1,6 +1,7 @@
 # Structured, Time Series and Language models
 This chapter we look at these topics from a very high level. Just touching through the topics. More like here is how to use the 
 software than like here is what is happening behind the scenes
+With deep learning on columnar data, we get state of the art results but with much less effort compared to GBM
 
 ## Dropout 
 1. It means randomly throwing away activations from convolutional layers
@@ -64,6 +65,7 @@ Well, when you do one-hot encoding, your cat vars are just behaving very linearl
 1. Why do embeddings when you can get away with just one-hot encoding? The reason we are doing embedding is that it just prevents the levels of the variable to act very linearly. Adding embeddings adds more dimensions in which the levels can covary. So Sunday and Saturday need not be fully exclusive now as they can have one of the embeddings as very high or something. 
 1. So how are date categorical vars are taken care of?  Well, there happens to be pandas function `date_addpart` which converts the date into new features like `day of week`, `is_end_month` etc. Now that helps our NN model to also learn some cyclic aspects of the time series. It is therefore necessary that we include such cyclic variables in our models to make sure sure it is getting the right kind of information to generate better time series predictions
 
-
+<br>
+1:17 hr completed
 
 
