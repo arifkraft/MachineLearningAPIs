@@ -66,6 +66,7 @@ Well, when you do one-hot encoding, your cat vars are just behaving very linearl
 1. So how are date categorical vars are taken care of?  Well, there happens to be pandas function `date_addpart` which converts the date into new features like `day of week`, `is_end_month` etc. Now that helps our NN model to also learn some cyclic aspects of the time series. It is therefore necessary that we include such cyclic variables in our models to make sure sure it is getting the right kind of information to generate better time series predictions
 
 <br>
-1:17 hr completed
+# Language models
+The definition seems to be quite simple. Given a specific set of words, can you tell what the next word wold be.! Keep in mind language models have a very specific meaning which is this def.
 
 
