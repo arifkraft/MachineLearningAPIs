@@ -67,6 +67,13 @@ Well, when you do one-hot encoding, your cat vars are just behaving very linearl
 
 
 # Language models
+Lot of the things we see in NLP is pretty new.
 The definition seems to be quite simple. Given a specific set of words, can you tell what the next word wold be.! Keep in mind language models have a very specific meaning which is this def.
-
-
+<br><br>
+The sentiment classification task consists of predicting the polarity (positive or negative) of a given text.
+<br><br>
+However, before we try to classify sentiment, we will simply try to create a language model; that is, a model that can predict the next word in a sentence. Why? Because our model first needs to understand the structure of English, before we can expect it to recognise positive vs negative sentiment.
+<br><br>
+So our plan of attack is the same as we used for Dogs v Cats: pretrain a model to do one thing (predict the next word), and fine tune it to do something else (classify sentiment).
+<br>
+1. Tokenisation: Splitting a sentence into array of words 
