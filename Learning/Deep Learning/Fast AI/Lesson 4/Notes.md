@@ -77,3 +77,5 @@ However, before we try to classify sentiment, we will simply try to create a lan
 So our plan of attack is the same as we used for Dogs v Cats: pretrain a model to do one thing (predict the next word), and fine tune it to do something else (classify sentiment).
 <br>
 1. Tokenisation: Splitting a sentence into array of words 
+
+# Please check the ipynb file 
