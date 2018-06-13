@@ -18,5 +18,10 @@ Just doing matrix dot product doen't bring down the loss very much, gotta add us
 just fine. Try it out on the notebook.
 <br>
 Have a look at what broadcasting is! (In Numpy or PyTorch context)
+<br>
+Create the embeddingNet and play around with it. Change dropouts, have more layers and so on!
+<br>
+Learn Jacobian and Hessian for derivatives
+
 
 
