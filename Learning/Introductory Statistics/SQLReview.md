@@ -1,10 +1,7 @@
 # SQL Review
 Contents:
 1. Mode Analytics Qs 
-2. 50 Qs to solve
-3. Optimization
-4. Schema Design 
-5. Interview Questions - 10
+1. Optimizing SQL Queries 
 
 ## 1. Mode Analytics Problems
 1.1 Write a query that returns songs that ranked between 10 and 20 (inclusive) in 1993, 2003, or 2013. Order the results by year and rank, and leave a comment on each line of the WHERE clause to indicate what that line does
@@ -128,4 +125,91 @@ select duration_seconds,
 from tutorial.dc_bikeshare_q1_2012;
 
 ```
+
+## 2. Optimizing SQL queries
+
+1. Define Business Requirements before Beginning
+1. Define SELECT Fields instead of SELECT *
+1. Select More Fields to Avoid SELECT DISTINCT
+1. Create Joins with INNER JOIN Rather than WHERE
+1. Use WHERE instead of HAVING to Define Filters
+1. Use Wildcards at the End of a Phrase Only
+1. Avoid using functions in predicates when possible
+1. Use inner join, instead of outer join if possible.
+1. DISTINCT and UNION should be used only if it is necessary.
+1. Push predicates into the OUTER JOIN clause whenever possible
+1. Duplicate constant condition for different tables whenever possible
+
+## 3. Interview Questions
+
+1. Find the 5th highest weight.
+
+```sql
+select top 1 weight
+from
+(
+select distinct top 2 weight
+from benn.college_football_players 
+order by weight desc;
+)a
+order by weight;
+```
+
+2.Query to find duplicate rows in table?(click here for explanation)
+
+```sql
+Select a,b,c,d
+From table
+Group by 1,2,3,4
+Having count(1)>1;
+```
+
+3. What is the Query to fetch first record from Employee table?
+```
+Select top 1
+From employee;
+```
+
+4. What is the Query to fetch last record from the table?
+
+```sql
+Select * 
+From employee 
+Where rowid = max(rowid)
+```
+
+5. How to fetch 3rd highest salary using Rank Function?
+
+```sql
+select * from
+(
+Select *, dense_rank() over(order by salary) as rank
+)a
+Where rank=3;
+```
+
+6. Display first 50% records from Employee table?
+
+```sql
+select * from
+(
+(Select *, row_number() over(order by (select 1) as row_num
+)a
+Where rownum>(count(*)/2)
+```
+
+7. How do i fetch only common records between 2 tables.
+
+```sql
+Select * from Employee;
+
+Intersect
+
+Select * from Employee1;
+```
+
+
+
+
+
 
