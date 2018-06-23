@@ -42,4 +42,90 @@ SELECT companies.state_code,
  WHERE companies.state_code IS NOT NULL
  GROUP BY 1
  ORDER BY 3 DESC;
-``
+```
+
+1.4 Write a query that counts the number of companies acquired within 3 years, 5 years, and 10 years of being founded (in 3 separate columns). Include a column for total companies acquired as well.
+
+```sql
+select acq.acquirer_city,
+       count(acq.company_permalink) as total,
+       count(case when acq.acquired_at_cleaned <= com.founded_at_clean::timestamp 
+             + INTERVAL '3 years' then 1 else NULL end) as before_3,
+       count(case when acq.acquired_at_cleaned <= com.founded_at_clean::timestamp
+             + INTERVAL '5 years' then 1 else NULL end) as before_5,
+       count(case when acq.acquired_at_cleaned <= com.founded_at_clean::timestamp
+             + INTERVAL '10 years' then 1 else NULL end) as before_10
+from  tutorial.crunchbase_acquisitions_clean_date as acq
+left join tutorial.crunchbase_companies_clean_date as com
+on acq.company_permalink = com.permalink
+group by 1
+having acquirer_city is not null
+order by 2 desc;
+```
+
+1.5 You can use EXTRACT to pull the pieces apart one-by-one
+
+```sql
+SELECT cleaned_date,
+       EXTRACT('year' FROM NOW()) AS years,
+       EXTRACT('year'   FROM cleaned_date) AS year,
+       EXTRACT('month'  FROM cleaned_date) AS month,
+       EXTRACT('day'    FROM cleaned_date) AS day,
+       EXTRACT('hour'   FROM cleaned_date) AS hour,
+       EXTRACT('minute' FROM cleaned_date) AS minute,
+       EXTRACT('second' FROM cleaned_date) AS second,
+       EXTRACT('decade' FROM cleaned_date) AS decade,
+       EXTRACT('dow'    FROM cleaned_date) AS day_of_week
+  FROM tutorial.sf_crime_incidents_cleandate;
+
+```
+
+
+1.6 Write a query that shows a running total of the duration of bike rides (similar to the last example), but grouped by end_terminal, and with ride duration sorted in descending order.
+
+```sql
+select end_terminal,
+       sum(duration_seconds) over(partition by end_terminal order by duration_seconds desc) as running_total
+from tutorial.dc_bikeshare_q1_2012;
+```
+
+1.7 Add row number without having to use partition by.
+
+```sql
+SELECT start_terminal,
+       start_time,
+       duration_seconds,
+       ROW_NUMBER() over(order by (select 1))as row
+  FROM tutorial.dc_bikeshare_q1_2012
+ WHERE start_time < '2012-01-08'
+
+```
+
+1.8 Write a query that shows the 5 longest rides from each starting terminal, ordered by terminal, and longest to shortest rides within each terminal. Limit to rides that occurred before Jan. 8, 2012.
+
+```sql
+select start_terminal,
+       duration_seconds,
+       rank
+from
+(
+select start_terminal,
+       duration_seconds,
+       dense_rank() over(partition by start_terminal order by duration_seconds desc) as rank,
+       row_number() over(partition by start_terminal order by duration_seconds desc) as rownum
+from tutorial.dc_bikeshare_q1_2012
+where start_time < '2012-01-08'
+) a
+where rownum<6
+order by start_terminal;
+```
+
+1.9 Write a query that shows only the duration of the trip and the percentile into which that duration falls (across the entire dataset—not partitioned by terminal).
+
+```sql
+select duration_seconds,
+       ntile(100) over(order by duration_seconds) as Percentile
+from tutorial.dc_bikeshare_q1_2012;
+
+```
+
